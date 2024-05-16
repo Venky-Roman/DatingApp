@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace API.Controllers;
-[ApiController]
-[Route("api/[controller]")]
-public class UsersController : ControllerBase
+
+public class UsersController : BaseApiController
 {
     private readonly DataContext _dataContext;
 
@@ -25,6 +25,7 @@ public class UsersController : ControllerBase
     }
     [HttpGet]
     [Route("{id}")]
+    [Authorize]
     public async Task<ActionResult<AppUser>> GetUserbyId(int id)
     {
         var user = await _dataContext.AppUsers.FirstOrDefaultAsync(x => x.Id == id);
