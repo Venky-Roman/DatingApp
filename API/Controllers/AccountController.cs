@@ -66,7 +66,7 @@ namespace API.Controllers
             var userfound = await _dataContext.AppUsers.FirstOrDefaultAsync(x => x.Id == userDto.Id);
             if(userfound == null) { return NotFound(); }
 
-            var response =_dataContext.AppUsers.Remove(userfound);
+            var response =  _dataContext.AppUsers.Remove(userfound);
            await _dataContext.SaveChangesAsync();
             return Ok(response);
         }
